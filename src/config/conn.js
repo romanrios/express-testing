@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
     // datos de cuenta de alwaysdata
@@ -34,5 +34,5 @@ const pool = mysql.createPool({
 
 // Export
 module.exports = {
-    conn: pool.promise()
+    conn: pool
 };
