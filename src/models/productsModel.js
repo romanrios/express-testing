@@ -25,9 +25,7 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
-        } finally {
-            await conn.end();
-        }
+        } 
     },
 
     getOne: async (params) => {
@@ -55,9 +53,7 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
-        } finally {
-            await conn.end();
-        }
+        } 
     }
 }
 
