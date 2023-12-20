@@ -1,7 +1,7 @@
 require('dotenv').config();
-const serverless = require('serverless-mysql');
+const mysql = require('serverless-mysql');
 
-const db = serverless({
+const db = mysql({
     config: {
         host: process.env.DB_HOST,
         database: process.env.DB_NAME,

@@ -4,15 +4,11 @@ module.exports = {
     getAll: async () => {
         try {
             const rows = await conn.query('SELECT * FROM users');
+            await conn.end();
             return rows;
         } catch (error) {
-            const e = {
-                isError: true,
-                message: `Error al consultar los datos: ${error}`
-            }
-            return e;
-        } finally {
-            await conn.end();
+            return { error };
+
         }
     },
 
