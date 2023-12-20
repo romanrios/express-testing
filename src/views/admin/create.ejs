@@ -1,0 +1,87 @@
+<%- include('../partials/header')%>
+
+    <main class="container create__main">
+
+        <!-- multipart/form-data indica que vamos a enviar archivos además de texto -->
+        <form action="/admin/create" method="POST" enctype="multipart/form-data">
+
+            <H1>CREAR NUEVO ITEM</H1>
+
+            <div class="editar-item">
+
+                <label for="categoria">Categoría:</label>
+
+                <select name="categoria" id="categoria">
+                    <option value="" disabled selected hidden>Seleccionar</option>
+                    <option value="opc1">Funkos</option>
+                    <option value="opc2">Remeras</option>
+                    <option value="opc3">Llaveros</option>
+                </select>
+
+                <label for="licencia">Licencia:</label>
+                <select name="licencia" id="licencia">
+                    <option value="" disabled selected hidden>Seleccionar</option>
+
+                    <% licences.forEach(licence=>{ %>
+                        <option value="opc<%=licence.licence_id%>">
+                            <%=licence.licence_name%>
+                        </option>
+                        <% }) %>
+
+                </select>
+            </div>
+
+
+            <div class="editar-item">
+                <label for="nombre">Nombre del Producto:</label>
+                <input class="edit__product-name" type="text" name="nombre" id="nombre">
+            </div>
+
+
+            <textarea name="descripcion" id="descripcion" cols="73" rows="6"
+                placeholder="Descripcion del producto"></textarea>
+
+            <div class="editar-item">
+                <label for="sku">SKU</label>
+                <input type="text" name="sku" id="sku">
+
+                <label for="precio">Precio:</label>
+                <input type="text" name="precio" id="precio">
+
+                <label for="stock">Stock</label>
+                <input class="input-numerico" type="text" name="stock" id="stock">
+            </div>
+
+
+            <div class="editar-item">
+                <label for="descuento">Descuento:</label>
+                <input class="input-numerico" type="text" name="descuento" id="descuento">
+
+                <label for="cuotas">Cuotas:</label>
+                <select name="cuotas" id="cuotas">
+                    <option value="" disabled selected hidden>Seleccionar</option>
+                    <option value="opc1">3 Cuotas sin Interés</option>
+                    <option value="opc2">6 Cuotas sin Interés</option>
+                    <option value="opc3">12 Cuotas sin Interés</option>
+                </select>
+            </div>
+
+            <div class="agregar-imagen">
+                <label for="imagenes">Imágenes</label>
+                <input id="imagenes" type="file" value="Elegir Archivos" name="images" multiple>
+                <!-- <span>No se ha seleccionado ningun archivo</span> -->
+            </div>
+
+            <div class="editar-item">
+
+                <a class="boton" href="#">Agregar Producto</a>
+                <a class="boton" href="@">Limpiar</a>
+                </select>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <%- include('../partials/footer')%>

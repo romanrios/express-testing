@@ -1,10 +1,9 @@
 const { conn } = require('../config/conn');
 
 module.exports = {
-
     getAll: async () => {
         try {
-            const [rows] = await conn.query('SELECT * FROM licences;');
+            const [rows] = await conn.query('SELECT * FROM users');
             return rows;
         } catch (error) {
             const e = {
@@ -12,11 +11,9 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
-        }
-        finally {
+        } finally {
             // conn.releaseConnection();
-            conn.end();
-        }
+            conn.end();        }
     },
 
-};
+}

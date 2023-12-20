@@ -1,0 +1,124 @@
+<%- include('../partials/header')%>
+
+<main class="container cart__main"">
+    <h2 class=" cart__title">CARRITO DE COMPRAS</h2>
+
+    <div class="cart__header">
+        <p>DETALLE DE PRODUCTO</p>
+        <p>CANTIDAD</p>
+        <p>TOTAL</p>
+    </div>
+
+    <%
+        totalItems=0;
+        totalPrice=0;
+
+        function toCurrency(number) {
+            // usamos toLocaleString método nativo de JS que convierte a formato moneda
+            return number.toLocaleString('es-AR', {
+            style: 'currency' , currency: 'ARS' }); }
+            
+            // si el carrito no está vacío iteramos
+        if(locals.shopCart && locals.shopCart != 0){ locals.shopCart.forEach(cartItem=> {
+            // operaciones para mostrar información en resumen
+            totalItems += 1*cartItem.quantity;
+            totalPrice += cartItem.quantity * items.find(item=> item.product_id == cartItem.id).product_price;
+            
+            // card con cada elemento del carrito 
+            %>
+    <ul id="card_<%= locals.shopCart%>" class="cart__component-container">
+        <li class="cart__component">
+            <article>
+                <img src="../../<%= items.find(item=> item.product_id == cartItem.id).img_front %>" alt="Figura Funko">
+                <div class="cart__component-info">
+                    <p class="cart__component-title">
+                        <%= items.find(item=> item.product_id == cartItem.id).product_name %>
+                    </p>
+                    <p class="cart__component-licence">
+                        <%= items.find(item=> item.product_id == cartItem.id).licence_name %>
+                    </p>
+                    <p class="cart__component-price">Precio unitario: <%= toCurrency(Number(items.find(item=>
+                                    item.product_id ==
+                                    cartItem.id).product_price)) %></p>
+                </div>
+            </article>
+
+            <div class="cart__component-quantity-container">
+                <div class="cart__component-quantity">
+                    <input id="quantity_<%=cartItem.id%>" class="item__input" type="text" name="quantity"
+                        value="<%= cartItem.quantity %>">
+                    <button onclick="addToCart('<%=cartItem.id%>', '<%= cartItem.quantity %>', 1)" id="add_<%=cartItem.id%>"
+                        class="cart__component-quantity-button" type="button">+</button>
+                    <button onclick="addToCart('<%=cartItem.id%>', '<%= cartItem.quantity %>', -1)" id="subtract_<%=cartItem.id%>" class="cart__component-quantity-button"
+                        type="button">-</button>
+                </div>
+            </div>
+
+            <p class="cart__component-price-total">
+                <%= toCurrency(cartItem.quantity * items.find(item=> item.product_id
+                            == cartItem.id).product_price) %>
+            </p>
+
+            <form action="/shop/cart/<%= cartItem.id %>?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="cart__button-cancel">
+                    <iconify-icon icon="octicon:x-circle-16"></iconify-icon>
+                </button>
+            </form>
+
+        </li>
+    </ul>
+
+    <% }) } else { %>
+
+    <ul class="cart__component-container">
+        <li class="cart__component">
+            <p>
+                Tu carrito está vacío
+            </p>
+        </li>
+    </ul>
+
+    <% } %>
+
+
+
+    <section class="cart__summary">
+
+        <h2 class="cart__title cart__summary-title">RESUMEN</h2>
+
+        <ul class="cart__summary-container">
+            <li class="cart__summary-line">
+                <span class="cart__summary-text">CANTIDAD DE ELEMENTOS</span>
+                <span class="cart__summary-data" id="">
+                    <%= totalItems%>
+                </span>
+            </li>
+            <li class="cart__summary-line">
+                <span class="cart__summary-text">SUBTOTAL</span>
+                <span class="cart__summary-data" id="">
+                    <%=toCurrency(totalPrice)%>
+                </span>
+            </li>
+            <li class="cart__summary-line">
+                <span class="cart__summary-text">ENVÍO</span>
+                <span class="cart__summary-data" id="">$ 0,00</span>
+            </li>
+            <div class="cart__summary-border"></div>
+            <li class="cart__summary-line-total">
+                <span class="cart__summary-text-total">TOTAL</span>
+                <span class="cart__summary-data-total" id="">
+                    <%=toCurrency(totalPrice)%>
+                </span>
+            </li>
+        </ul>
+
+        <a class="cart__summary-pay-button" href="#">IR A PAGAR</a>
+
+    </section>
+
+</main>
+
+
+<script src="/js/cart.js"></script>
+<%- include('../partials/footer')%>

@@ -1,13 +1,13 @@
-const { getAllItems } = require('../models/productsModel');
-const { getAllLicences } = require('../models/licencesModel');
+const { getAllItems } = require('../services/productsServices');
+const { getAllLicences } = require('../services/licencesServices');
 
 module.exports = {
 
-    getHome: async (req, res) => {
+    home: async (req, res) => {
 
         // req.session.count = req.session.count ? ++req.session.count : 1;
         // console.log(req.session.count);
-
+        
         const items = await getAllItems();
         const licences = await getAllLicences();
 
@@ -27,4 +27,19 @@ module.exports = {
             }
         );
     },
-}
+
+    contact: (req, res) => res.render('./contact', {
+        view: {
+            title: "Contacto | Funkoshop"
+        }
+    }),
+
+    about: (req, res) => res.send('Página de Sobre Nosotros'),
+    
+    faqs: (req, res) => res.send('Página de Preguntas Frecuentes'),
+
+};
+
+
+
+
