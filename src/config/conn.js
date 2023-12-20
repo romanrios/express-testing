@@ -1,38 +1,21 @@
 require('dotenv').config();
-const mysql = require('mysql2/promise');
+const serverless = require('serverless-mysql');
 
-const pool = mysql.createPool({
-    // datos de cuenta de alwaysdata
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
-
-    // Indica que el pool debe esperar si todas las conexiones están ocupadas y ha
-    // alcanzado el límite de conexiones (connectionLimit) antes de arrojar un error.
-    waitForConnections: true,
-
-    // Establece el límite máximo de conexiones que el pool puede manejar simultáneamente.
-    connectionLimit: 10,
-
-    // Establece el límite de la cola para conexiones pendientes.
-    // Un valor de 0 significa que no hay límite.
-    queueLimit: 0
+const db = serverless({
+    config: {
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+    },
+    pool: {
+        min: 1,      // Número mínimo de conexiones en el pool
+        max: 5,      // Número máximo de conexiones en el pool
+        idleTimeoutMillis: 30000, // Tiempo máximo (en milisegundos) que una conexión puede estar inactiva antes de ser cerrada
+        acquireTimeoutMillis: 30000, // Tiempo máximo (en milisegundos) que una conexión puede estar esperando para ser adquirida del pool
+    },
 });
 
-
-// Testing ( node ./src/config/conn.js )
-// pool.getConnection((error, connection) => {
-//     if (error) {
-//         console.error('Hubo un error de conexión a la base de datos: ', error);
-//     } else {
-//         console.log('Conexión a la base de datos fue exitosa.');
-//         connection.release();
-//     }
-// });
-
-// Export
 module.exports = {
-    conn: pool
+    conn: db
 };

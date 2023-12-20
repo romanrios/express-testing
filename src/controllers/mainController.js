@@ -16,6 +16,7 @@ module.exports = {
             return res.status(500).send('Hemos tenido un error al consultar los datos')
         }
 
+        // res.send(items)
         return res.render('./home',
             {
                 view:

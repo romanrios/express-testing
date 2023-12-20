@@ -2,9 +2,7 @@ const { conn } = require('../config/conn');
 
 module.exports = {
     getAll: async () => {
-        let connection;
         try {
-            connection = await conn.getConnection();
 
             // 'SELECT
             //   products.*,
@@ -19,9 +17,7 @@ module.exports = {
             // ORDER BY
             //   product_id DESC;'
 
-
-
-            const [rows] = await connection.query('SELECT products.*, licences.licence_name, categories.category_name FROM products LEFT JOIN licences ON products.licence_id = licences.licence_id LEFT JOIN categories ON products.category_id = categories.category_id ORDER BY product_id DESC;');
+            const rows = await conn.query('SELECT products.*, licences.licence_name, categories.category_name FROM products LEFT JOIN licences ON products.licence_id = licences.licence_id LEFT JOIN categories ON products.category_id = categories.category_id ORDER BY product_id DESC;');
             return rows;
         } catch (error) {
             const e = {
@@ -30,15 +26,13 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) { await connection.release() };
+            await conn.end();
         }
     },
 
     getOne: async (params) => {
 
-        let connection;
         try {
-            connection = await conn.getConnection();
 
             // 'SELECT
             //   products.*,
@@ -53,7 +47,7 @@ module.exports = {
             // WHERE
             //   ?;', params
 
-            const [rows] = await connection.query('SELECT products.*, licences.licence_name, categories.category_name FROM products LEFT JOIN licences ON products.licence_id = licences.licence_id LEFT JOIN categories ON products.category_id = categories.category_id WHERE ?;', params);
+            const rows = await conn.query('SELECT products.*, licences.licence_name, categories.category_name FROM products LEFT JOIN licences ON products.licence_id = licences.licence_id LEFT JOIN categories ON products.category_id = categories.category_id WHERE ?;', params);
             return rows;
         } catch (error) {
             const e = {
@@ -62,7 +56,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) { await connection.release() };
+            await conn.end();
         }
     }
 }

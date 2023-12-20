@@ -2,10 +2,8 @@ const { conn } = require('../config/conn');
 
 module.exports = {
     getAll: async () => {
-        let connection;
         try {
-            connection = await conn.getConnection();
-            const [rows] = await connection.query('SELECT * FROM users');
+            const rows = await conn.query('SELECT * FROM users');
             return rows;
         } catch (error) {
             const e = {
@@ -14,7 +12,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) { await connection.release() };
+            await conn.end();
         }
     },
 
