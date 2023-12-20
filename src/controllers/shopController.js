@@ -4,17 +4,20 @@ module.exports = {
 
     getShop: async (req, res) => {
         const items = await getAllItems();
-        res.render('./shop/shop',
-            {
-                view:
-                {
-                    title: "Shop | Funkoshop"
-                },
-                items,
-                showFirst: "Funkos",
-                sortBy: 'category_name'
-            }
-        );
+        res.send(items);
+
+
+        // res.render('./shop/shop',
+        //     {
+        //         view:
+        //         {
+        //             title: "Shop | Funkoshop"
+        //         },
+        //         items,
+        //         showFirst: "Funkos",
+        //         sortBy: 'category_name'
+        //     }
+        // );
     },
 
 };
