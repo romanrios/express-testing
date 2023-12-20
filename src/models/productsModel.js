@@ -30,7 +30,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) connection.destroy();
+            if (connection) { await connection.release };
         }
     },
 
@@ -62,7 +62,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) connection.destroy();
+            if (connection) { await connection.release };
         }
     }
 }
