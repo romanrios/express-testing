@@ -14,7 +14,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) { await connection.release };
+            if (connection) { await connection.release() };
         }
     },
 
