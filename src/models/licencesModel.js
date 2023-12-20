@@ -15,7 +15,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) connection.release();
+            if (connection) connection.end();
         }
     },
 
