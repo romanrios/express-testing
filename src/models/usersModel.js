@@ -2,8 +2,10 @@ const { conn } = require('../config/conn');
 
 module.exports = {
     getAll: async () => {
+        let connection;
         try {
-            const [rows] = await conn.query('SELECT * FROM users');
+            connection = await conn.getConnection();
+            const [rows] = await connection.query('SELECT * FROM users');
             return rows;
         } catch (error) {
             const e = {
@@ -11,6 +13,8 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
+        } finally {
+            if (connection) connection.release();
         }
     },
 
