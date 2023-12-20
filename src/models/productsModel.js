@@ -26,9 +26,6 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
-        } finally {
-            // conn.releaseConnection();
-            await conn.end();
         }
     },
 
@@ -57,9 +54,6 @@ module.exports = {
                 message: `Error al consultar los datos: ${error}`
             }
             return e;
-        } finally {
-            // conn.releaseConnection();
-            await conn.end();
         }
     }
 }

@@ -13,10 +13,6 @@ module.exports = {
             }
             return e;
         }
-        finally {
-            // conn.releaseConnection();
-            await conn.end();
-        }
     },
 
 };
