@@ -14,7 +14,7 @@ module.exports = {
             }
             return e;
         } finally {
-            if (connection) connection.end();
+            if (connection) connection.destroy();
         }
     },
 
