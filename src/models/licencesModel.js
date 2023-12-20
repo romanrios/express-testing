@@ -15,7 +15,7 @@ module.exports = {
         }
         finally {
             // conn.releaseConnection();
-            conn.end();
+            await conn.end();
         }
     },
 
