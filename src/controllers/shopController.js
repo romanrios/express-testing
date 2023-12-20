@@ -5,7 +5,7 @@ module.exports = {
     getShop: async (req, res) => {
         const items = await getAllItems();
 
-        await res.render('./shop/shop',
+        res.render('./shop/shop',
             {
                 view:
                 {
