@@ -1,7 +1,7 @@
 const { conn } = require('../config/conn');
 
 module.exports = {
-    getAll: async () => {
+    getAllItems: async () => {
         try {
 
             // 'SELECT

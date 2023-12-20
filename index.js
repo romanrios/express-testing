@@ -6,12 +6,19 @@ const PORT = 3000;
 const mainRoutes = require('./src/routes/mainRoutes');
 const { initSession } = require('./src/utils/sessions');
 const path = require('path');
+const methodOverride = require('method-override');
 
 // Template Engine
 app.set('view engine', 'ejs');
 app.set('views', path.resolve(__dirname, './src/views')); // agregamos path para Vercel
 
-// middleware
+// Middlewares de configuración
+app.use(express.json()); // Nos ahorra usar JSON.parse() al recibir datos y JSON.stringify() para enviarlos. Permite capturar json en req.body.
+app.use(express.urlencoded()); // Permite capturar datos de formulario (application/x-www-form-urlencoded) con req.body    (deprecated?)
+app.use(methodOverride('_method')); // para PUT y DELETE
+app.use(express.static(path.resolve(__dirname, 'public'))); // define carpeta de archivos estáticos
+
+// Session
 app.use(initSession());
 
 // Rutas

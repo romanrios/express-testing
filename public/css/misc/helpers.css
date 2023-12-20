@@ -1,0 +1,86 @@
+/* HELPERS */
+
+html {
+    font-family: var(--base-font);
+    font-size: 62.5%;
+    color: var(--dark-solid);
+
+    scroll-behavior: smooth;
+}
+
+main {
+    min-height: 73vh;
+}
+
+a {
+    /* quita subrayado de hipervínculos */
+    text-decoration: none;
+
+    /* heredar de su elemento contenerdor */
+    color: inherit;
+    font-family: inherit;
+}
+
+header,
+footer {
+    color: var(--light-font-solid);
+    font-family: var(--alternative-font);
+}
+
+ul,
+ol {
+    /* elimina formato predeterminado de listas */
+    list-style-type: none;
+}
+
+p {
+    font-size: var(--font-medium);
+}
+
+img {
+    width: 100%;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0px auto;
+}
+
+.boton {
+    background-color: var(--primary-solid);
+    padding: 8px 16px;
+    color: var(--light-font-solid);
+    border: none;
+}
+
+/* MEDIA QUERIES  */
+
+@media screen and (max-width: 1250px) {
+    main {
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 45%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        font-size: 35%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    html {
+        font-size: 30%;
+    }
+}

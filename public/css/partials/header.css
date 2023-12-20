@@ -1,0 +1,113 @@
+/* HEADER */
+
+header {
+    background-color: var(--dark-bg-solid);
+    padding: var(--spacing-36);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo {
+    max-width: 65.19rem;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-20);
+}
+
+.navbar__link {
+    font-size: var(--font-medium);
+    font-weight: 500;
+    padding: var(--spacing-8) var(--spacing-16);
+    display: inline-block;
+    transition: background .3s ease-in-out;
+    position: relative;
+}
+
+.navbar__link:hover {
+    background-color: var(--primary-900);
+}
+
+.with-icon {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+}
+
+.with-submenu:hover .submenu {
+    display: block;
+    z-index: 2;
+
+}
+
+.submenu {
+    display: none;
+    width: 30rem;
+    position: absolute;
+    background-color: var(--dark-bg-solid);
+}
+
+.submenu__link {
+    display: block;
+    padding: var(--spacing-8) var(--spacing-16);
+    font-size: var(--font-medium);
+    transition: background .3s ease-in-out;
+}
+
+.submenu__link:hover {
+    background-color: var(--primary-900);
+}
+
+.navbar__cart {
+    position: relative;
+    display: inline-flex;
+}
+
+.navbar__cart:hover {
+    scale: 1.1;
+}
+
+.navbar__cart img {
+    min-width: 2.8rem;
+    max-width: 3.3rem;
+}
+
+.navbar__cart-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -0.7rem;
+    right: -1.3rem;
+    padding: 0.3rem 0.3rem;
+    min-width: 2.2rem;
+    min-height: 2.2rem;
+
+
+    font-size: 1.3rem;
+    font-family: var(--base-font);
+    color: white;
+    border-radius: 50%;
+    background-color: var(--primary-solid);
+}
+
+
+/* media queries */
+@media screen and (max-width: 1024px) {
+    .navbar__logo {
+        max-width: 40rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar__logo a img {
+        content: url('/img/branding/isotype.svg');
+        max-height: 5rem;
+    }
+}
