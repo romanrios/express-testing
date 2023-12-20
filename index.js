@@ -4,9 +4,10 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const mainRoutes = require('./src/routes/mainRoutes');
+const shopRoutes = require('./src/routes/shopRoutes');
 const { initSession } = require('./src/utils/sessions');
 const path = require('path');
-// const methodOverride = require('method-override');
+
 
 // Template Engine
 app.set('view engine', 'ejs');
@@ -23,6 +24,8 @@ app.use(initSession());
 
 // Rutas
 app.use('/', mainRoutes);
+app.use('/shop', shopRoutes);
+
 
 // variables que estarán disponibles en todas las views
 app.use((req, res, next) => {
