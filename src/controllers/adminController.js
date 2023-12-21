@@ -27,7 +27,8 @@ module.exports = {
     getEdit: async (req, res) => {
         const id = req.params.id;
         const item = await getOne({ product_id: id });
-        const licences = await getAllLicences();
+        // const licences = await getAllLicences();
+        licences = [{ licence_id: "id", licence_name: "Pokemon", licence_description: "description" }];
         res.render('./admin/edit',
             {
                 view: { title: "Admin | Funkoshop" },

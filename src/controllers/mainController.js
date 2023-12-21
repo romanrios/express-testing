@@ -7,16 +7,16 @@ module.exports = {
 
         // req.session.count = req.session.count ? ++req.session.count : 1;
         // console.log(req.session.count);
-        
+
         const items = await getAllItems();
-        const licences = await getAllLicences();
+        // const licences = await getAllLicences();
+        licences = [{ licence_id: "id", licence_name: "Pokemon", licence_description: "description" }];
 
         // Ejemplo de manejo de error al consultar la BBDD
         if (items.isError || licences.isError) {
             return res.status(500).send('Hemos tenido un error al consultar los datos')
         }
 
-        // res.send(items)
         return res.render('./home',
             {
                 view:
@@ -36,7 +36,7 @@ module.exports = {
     }),
 
     about: (req, res) => res.send('Página de Sobre Nosotros'),
-    
+
     faqs: (req, res) => res.send('Página de Preguntas Frecuentes'),
 
 };

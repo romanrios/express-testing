@@ -81,8 +81,9 @@ module.exports = {
         const id = req.params.id;
         // Pasamos un parámetro para el WHERE de la consulta a la BBDD
         const item = await getOne({ product_id: id });
-        const licence = item[0].licence_name;
-        const related = await getOne({ licence_name: licence });
+        // const licence = item[0].licence_name;
+        // const related = await getOne({ licence_name: licence });
+        const related = item;
         res.render('./shop/item',
             {
                 view:
