@@ -1,8 +1,9 @@
-const { conn } = require('../config/conn');
+const mysql = require('mysql2/promise')
+const connOb = require('../config/conn');
 
 module.exports = {
-
     getAll: async () => {
+        const conn = await mysql.createConnection(connOb)
         try {
             const [rows] = await conn.query('SELECT * FROM licences;');
             return rows;
